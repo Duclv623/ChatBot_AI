@@ -1,0 +1,15 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="001_create_core_tables.sql" author="huuson" dbms="postgresql" onValidationFail="HALT" failOnError="true">
+        <sqlFile path="db/changelog/scripts/001_create_core_tables.sql"/>
+    </changeSet>
+    <changeSet id="002_modify_message_table.sql" author="huuson" dbms="postgresql" onValidationFail="HALT" failOnError="true">
+        <sqlFile path="db/changelog/scripts/002_modify_message_table.sql"/>
+    </changeSet>
+    <changeSet id="003_modify_conversation_table.sql" author="huuson" dbms="postgresql" onValidationFail="HALT" failOnError="true">
+        <sqlFile path="db/changelog/scripts/003_modify_conversation_table.sql"/>
+    </changeSet>
+</databaseChangeLog>
+

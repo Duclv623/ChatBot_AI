@@ -1,0 +1,52 @@
+# Bỏ các thư mục chứa dữ liệu và mô hình
+data_add/
+embed_model/
+db/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.log
+
+# Virtual environment
+venv/
+.env
+*.env
+
+# VSCode settings
+.vscode/
+
+# MacOS
+.DS_Store
+
+# Docker
+*.pid
+docker-compose.override.yml
+
+# Các file mô hình & dữ liệu ML
+*.h5
+*.pt
+*.pth
+*.ckpt
+*.joblib
+*.npy
+*.npz
+*.pkl
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Byte-compiled / optimized / DLL files
+*.so
+
+# System
+Thumbs.db
+ehthumbs.db
+
+# Temporary files
+*.bak
+*.swp
+*.tmp
+*.orig

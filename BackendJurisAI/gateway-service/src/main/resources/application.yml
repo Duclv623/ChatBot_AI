@@ -1,0 +1,74 @@
+server:
+  port: 9298
+
+spring:
+  application:
+    name: api-gateway
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: true
+              lower-case-service-id: true
+
+          routes:
+            - id: account-service-public
+              uri: lb://ACCOUNT-SERVICE
+              predicates:
+                - Path=/v1/account/login, /v1/account/register, /v1/account/verify, /v1/account/forgot-password, /v1/account/reset-password/verify, /v1/account/reset-password
+
+            - id: account-service-protected
+              uri: lb://ACCOUNT-SERVICE
+              predicates:
+                - Path=/v1/account/logout, /v1/account/change-password
+              filters:
+                - name: AuthenticationFilter
+
+            - id: user-service-protected
+              uri: lb://ACCOUNT-SERVICE
+              predicates:
+                - Path=/v1/users/**
+              filters:
+                - name: AuthenticationFilter
+
+            - id: message-service-protected
+              uri: lb://MESSAGE_SERVICE
+              predicates:
+                - Path=/v1/message-service/**
+              filters:
+                - name: AuthenticationFilter
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+app:
+  jwt:
+    secret: 'Y/yr4+MhAz9pIT7H+Cmz40VSNvMAypqa9gGsejH+n3Rz7L5B69LoVCFYM9+SVBif'
+
+  security:
+    public-paths:
+      - /v1/account/login
+      - /v1/account/register
+      - /v1/account/verify
+      - /v1/account/forgot-password
+      - /v1/account/reset-password/verify
+      - /v1/account/reset-password
+      - /eureka/**
+
+logging:
+  level:
+    root: INFO
+    com.jurisai.gateway: DEBUG
